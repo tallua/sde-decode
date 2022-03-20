@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { Container, Grid, IconButton, ImageList, ImageListItem, List, ListItem, ListItemText } from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -17,9 +17,17 @@ const alphabets = [
   'z'
 ];
 
+function GenerateCaesars(str: string) : string[] {
+  return [];
+}
+
 function App() {
   let [sequence, setSequence] = useState<string[]>([]);
-  let [anagrams,] = useState<string[]>(Array(26).fill('empty'));
+  let [caesars, setCaesars] = useState<string[]>(Array(26).fill('empty'));
+
+  useEffect(() => {
+    setCaesars(GenerateCaesars(sequence.join()));
+  }, [ sequence ]);
 
   let filledSequence = sequence.concat(Array(MAX_SEQUENCE - sequence.length).fill('empty'));
 
@@ -84,7 +92,7 @@ function App() {
             <Grid item xs={6}>
               <List>
                 {
-                  anagrams.slice(0, 13).map((str) =>
+                  caesars.slice(0, 13).map((str) =>
                     <ListItem key={str}>
                       <ListItemText> str </ListItemText>
                     </ListItem>
@@ -95,7 +103,7 @@ function App() {
             <Grid item xs={6}>
               <List>
                 {
-                  anagrams.slice(13, 26).map((str) =>
+                  caesars.slice(13, 26).map((str) =>
                     <ListItem key={str}>
                       <ListItemText> str </ListItemText>
                     </ListItem>
