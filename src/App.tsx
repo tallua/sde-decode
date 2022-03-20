@@ -34,7 +34,13 @@ function App() {
               {
                 alphabets.map((ch, index) =>
                   <ImageListItem
-                    key={`${index}:${ch}`}>
+                    key={`${index}:${ch}`}
+                    onClick={() => {
+                      if (MAX_SEQUENCE <= sequence.length) {
+                        return;
+                      }
+                      setSequence(sequence.concat(ch));
+                    }}>
                     <img
                       src={`letters/${ch}.png`}
                       alt={ch} />
@@ -59,10 +65,18 @@ function App() {
               }
             </ImageList>
             <Box>
-              <IconButton>
+              <IconButton onClick={() => {
+                if (sequence.length === 0) {
+                  return;
+                }
+
+                setSequence(sequence.slice(0, sequence.length - 1));
+              }}>
                 <UndoIcon color='info' />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={() => {
+                setSequence([]);
+              }}>
                 <RestartAltIcon color='info' />
               </IconButton>
             </Box>
