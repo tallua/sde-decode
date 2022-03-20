@@ -65,21 +65,21 @@ function App() {
                 )
               }
             </ImageList>
-            <Box>
-              <IconButton onClick={() => {
-                if (sequence.length === 0) {
-                  return;
-                }
-
-                setSequence(sequence.slice(0, sequence.length - 1));
-              }}>
-                <UndoIcon color='info' />
-              </IconButton>
-              <IconButton onClick={() => setSequence([])}>
-                <RestartAltIcon color='info' />
-              </IconButton>
-            </Box>
           </Box>
+          <Grid container justifyContent="flex-end">
+            <IconButton onClick={() => {
+              if (sequence.length === 0) {
+                return;
+              }
+
+              setSequence(sequence.slice(0, sequence.length - 1));
+            }}>
+              <UndoIcon color='info' />
+            </IconButton>
+            <IconButton onClick={() => setSequence([])}>
+              <RestartAltIcon color='info' />
+            </IconButton>
+          </Grid>
           <Grid container spacing={1}>
             <Grid item xs={6}>
               <List>
