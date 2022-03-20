@@ -6,6 +6,7 @@ import UndoIcon from '@mui/icons-material/Undo';
 import { Box } from '@mui/system';
 
 
+const MAX_ALPHABET_LENGTH = 26;
 const MAX_SEQUENCE = 13;
 
 const alphabets = [
@@ -17,8 +18,18 @@ const alphabets = [
   'z'
 ];
 
-function GenerateCaesars(str: string) : string[] {
-  return [];
+function GenerateCaesars(str: string): string[] {
+  let caesars: string[] = [];
+
+  for (let inc = 0; inc < MAX_ALPHABET_LENGTH; ++inc) {
+    let caesar = Array.from(str)
+      .map((ch) => ch.charCodeAt(0) + inc)
+      .map((ch) => 'z'.charCodeAt(0) < ch ? ch - MAX_ALPHABET_LENGTH : ch);
+    caesars.push(String.fromCharCode(...caesar));
+  }
+
+  console.log(caesars);
+  return caesars;
 }
 
 function App() {
@@ -26,8 +37,8 @@ function App() {
   let [caesars, setCaesars] = useState<string[]>(Array(26).fill('empty'));
 
   useEffect(() => {
-    setCaesars(GenerateCaesars(sequence.join()));
-  }, [ sequence ]);
+    setCaesars(GenerateCaesars(sequence.join('')));
+  }, [sequence]);
 
   let filledSequence = sequence.concat(Array(MAX_SEQUENCE - sequence.length).fill('empty'));
 
@@ -92,9 +103,9 @@ function App() {
             <Grid item xs={6}>
               <List>
                 {
-                  caesars.slice(0, 13).map((str) =>
-                    <ListItem key={str}>
-                      <ListItemText> str </ListItemText>
+                  caesars.slice(0, MAX_ALPHABET_LENGTH / 2).map((str, index) =>
+                    <ListItem key={`${index}:${str}`}>
+                      <ListItemText> {str} </ListItemText>
                     </ListItem>
                   )
                 }
@@ -103,9 +114,9 @@ function App() {
             <Grid item xs={6}>
               <List>
                 {
-                  caesars.slice(13, 26).map((str) =>
-                    <ListItem key={str}>
-                      <ListItemText> str </ListItemText>
+                  caesars.slice(MAX_ALPHABET_LENGTH / 2, MAX_ALPHABET_LENGTH).map((str, index) =>
+                    <ListItem key={`${index}:${str}`}>
+                      <ListItemText> {str} </ListItemText>
                     </ListItem>
                   )
                 }
