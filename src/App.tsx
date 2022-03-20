@@ -39,6 +39,7 @@ function App() {
                       if (MAX_SEQUENCE <= sequence.length) {
                         return;
                       }
+
                       setSequence(sequence.concat(ch));
                     }}>
                     <img
@@ -74,9 +75,7 @@ function App() {
               }}>
                 <UndoIcon color='info' />
               </IconButton>
-              <IconButton onClick={() => {
-                setSequence([]);
-              }}>
+              <IconButton onClick={() => setSequence([])}>
                 <RestartAltIcon color='info' />
               </IconButton>
             </Box>
