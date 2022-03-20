@@ -43,5 +43,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "author": {
+    "name": "tallua",
+    "email": "talluay@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/tallua/sde-decode"
   }
 }
