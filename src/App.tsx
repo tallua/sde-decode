@@ -18,17 +18,18 @@ const alphabets = [
   'z'
 ];
 
-function GenerateCaesars(str: string): string[] {
+export function GenerateSDE(str: string): string[] {
   let caesars: string[] = [];
 
   for (let inc = 0; inc < MAX_ALPHABET_LENGTH; ++inc) {
     let caesar = Array.from(str)
-      .map((ch) => ch.charCodeAt(0) + inc)
-      .map((ch) => 'z'.charCodeAt(0) < ch ? ch - MAX_ALPHABET_LENGTH : ch);
+      .map((ch) => ch.charCodeAt(0) - 'a'.charCodeAt(0))
+      .map((ch) => ch + inc)
+      .map((ch) => ch % (MAX_ALPHABET_LENGTH - 1))
+      .map((ch) => ch + 'a'.charCodeAt(0));
     caesars.push(String.fromCharCode(...caesar));
   }
 
-  console.log(caesars);
   return caesars;
 }
 
@@ -37,7 +38,7 @@ function App() {
   let [caesars, setCaesars] = useState<string[]>(Array(26).fill('empty'));
 
   useEffect(() => {
-    setCaesars(GenerateCaesars(sequence.join('')));
+    setCaesars(GenerateSDE(sequence.join('')));
   }, [sequence]);
 
   let filledSequence = sequence.concat(Array(MAX_SEQUENCE - sequence.length).fill('empty'));
